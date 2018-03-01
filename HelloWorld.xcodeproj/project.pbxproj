@@ -15,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		262A4D662047D32A00BBC123 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		26CEAACF2046AE7F005C281E /* HelloWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26CEAAD22046AE7F005C281E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26CEAAD92046AE7F005C281E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +39,7 @@
 		26CEAAC62046AE7F005C281E = {
 			isa = PBXGroup;
 			children = (
+				262A4D662047D32A00BBC123 /* README.md */,
 				26CEAAD12046AE7F005C281E /* HelloWorld */,
 				26CEAAD02046AE7F005C281E /* Products */,
 			);
