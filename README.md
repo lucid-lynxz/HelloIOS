@@ -18,3 +18,24 @@ override func viewWillDisappear(_ animated: Bool) {
     print("键盘打开了")
 }
 ```
+
+## 显示alert提示框
+```swift
+// RootViewContoller.swift
+// 添加某个button的 toup up inside 事件到本方法
+@IBAction func showAlertDialog(_ sender: Any) {
+    let alertController:UIAlertController = UIAlertController(title: "友情提醒", message: "你该下班了", preferredStyle: UIAlertControllerStyle.alert)
+    
+    // 否定按钮, 位于左边或者下边(按钮过长时,上下排列)
+    let noActijon = UIAlertAction(title: "不, 我还要写bug", style: UIAlertActionStyle.cancel, handler: {alertAction -> Void in  print("tab no button")
+    })
+    // 肯定按钮, 位于右边或者上边
+    let yesAction = UIAlertAction(title: "好的, 这就闪人", style: .default, handler: {alertAction -> Void in print("tap yes button")})
+
+    alertController.addAction(yesAction)
+    alertController.addAction(noActijon)
+
+    // 显示
+    self.present(alertController,animated: true,completion: nil)
+}
+```
