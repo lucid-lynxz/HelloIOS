@@ -24,6 +24,18 @@ class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegat
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // 注册键盘广播监听
+        // 别忘了在合适的时候注销监听
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardDidShow(_:)), name: Notification.Name.UIKeyboardDidShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: Notification.Name.UIKeyboardDidHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // 注销键盘广播监听
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardDidShow, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardDidHide, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,6 +58,10 @@ class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegat
     // 用户在textField控件上按下return时回调
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print(TAG,"TextField获得焦点,用户点击了return键")
+        // 隐藏键盘
+        // 需要放弃 firstResponder
+        // 键盘隐藏后, iOS系统发发出广播
+        textField.resignFirstResponder()
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
@@ -60,5 +76,14 @@ class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegat
         }
         return true
     }
+    
+  @objc  func keyboardDidShow(_ notification:Notification){
+        print("键盘打开了")
+    }
+    
+   @objc func keyboardDidHide(_ notification:Notification){
+        print("键盘关闭了")
+    }
+    
     
 }
