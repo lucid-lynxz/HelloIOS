@@ -16,19 +16,24 @@ import UIKit
  */
 class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegate {
     let TAG = "RootViewController"
-
+    
     // 通过 @IBOutlet 来关联xib布局中的控件
     @IBOutlet weak var labelInfo: UILabel!
     
+    // 类似于loading框
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
+    @IBOutlet weak var progressView: UIProgressView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         // 注册键盘广播监听
         // 别忘了在合适的时候注销监听
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardDidShow(_:)), name: Notification.Name.UIKeyboardDidShow, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: Notification.Name.UIKeyboardDidHide, object: nil)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,7 +42,7 @@ class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegat
         
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardDidHide, object: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,6 +58,40 @@ class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegat
             info = "hello iOS \(clickCount)"
         }
         labelInfo.text = info
+    }
+    
+    // 点击 upload 按钮后回调
+    @IBAction func startUpload(_ sender: UIButton) {
+        if activityIndicatorView.isAnimating {
+            activityIndicatorView.stopAnimating()
+            sender.setTitle("重新开始", for: UIControlState.normal)
+        }else{
+            activityIndicatorView.startAnimating()
+            sender.setTitle("停止", for: UIControlState.normal)
+        }
+    }
+    
+    var timer:Timer!
+    var btnDownload:UIButton?
+    @IBAction func startDownload(_ sender: UIButton) {
+        sender.isEnabled = false
+        btnDownload = sender
+        self.progressView.progress = 0
+        self.timer =  Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(download), userInfo: nil, repeats: true)
+    }
+    
+    @objc func download(){
+        self.progressView.progress += 0.1
+        if (self.progressView.progress == 1.0) {
+            self.timer.invalidate()
+            
+            let alertController = UIAlertController(title: "download complete", message: "", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+            btnDownload?.isEnabled = true
+        }
+        
     }
     
     // 用户在textField控件上按下return时回调
@@ -77,19 +116,19 @@ class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegat
         return true
     }
     
-  @objc  func keyboardDidShow(_ notification:Notification){
+    @objc  func keyboardDidShow(_ notification:Notification){
         print("键盘打开了")
     }
     
-   @objc func keyboardDidHide(_ notification:Notification){
+    @objc func keyboardDidHide(_ notification:Notification){
         print("键盘关闭了")
     }
-
+    
     
     @IBAction func switchValueChange(_ sender: UISwitch) {
         print(TAG,"switch state: ",sender.isOn)
     }
-// 显示alertView
+    // 显示alertView
     @IBAction func showAlertDialog(_ sender: Any) {
         let alertController:UIAlertController = UIAlertController(title: "友情提醒", message: "你该下班了", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -103,4 +142,5 @@ class RootViewController: UIViewController,UITextViewDelegate,UITextFieldDelegat
         // 显示
         self.present(alertController,animated: true,completion: nil)
     }
+    
 }

@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RootViewController" customModule="HelloWorld" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicatorView" destination="hI7-h2-QJB" id="25H-4p-M5h"/>
                 <outlet property="labelInfo" destination="3wN-sz-54o" id="Iz0-sw-MCf"/>
+                <outlet property="progressView" destination="HOc-1i-0bg" id="avH-3D-LuN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -93,6 +95,36 @@
                         <action selector="showAlertDialog:" destination="-1" eventType="touchUpInside" id="yuz-dH-GzL"/>
                     </connections>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hI7-h2-QJB">
+                    <rect key="frame" x="26" y="407" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRo-7Q-bDc">
+                    <rect key="frame" x="75" y="402" width="71" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.40253051387261196" blue="0.86301766820496573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="upload">
+                        <color key="titleColor" red="0.93503654028513805" green="1" blue="0.97414760678828893" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="startUpload:" destination="-1" eventType="touchUpInside" id="SpY-U9-AFZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2oc-7y-0pB">
+                    <rect key="frame" x="181" y="402" width="83" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.18613443262687324" green="0.61072472549691192" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="download">
+                        <color key="titleColor" red="0.95707762322132595" green="0.95598196861799323" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="startDownload:" destination="-1" eventType="touchUpInside" id="q90-7m-Vco"/>
+                    </connections>
+                </button>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOc-1i-0bg">
+                    <rect key="frame" x="25" y="457" width="267" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
